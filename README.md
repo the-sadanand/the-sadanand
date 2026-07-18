@@ -128,14 +128,6 @@ I'm a **Machine Learning Engineer Trainee** and final-year **B.Tech CSE (AI & ML
 
 ---
 
-## 🏆 Trophies
-
-<div align="center">
-
-![Trophies](https://github-profile-trophy.vercel.app/?username=the-sadanand&theme=tokyonight&no-frame=true&column=6&margin-w=4&margin-h=4&no-bg=true)
-
-</div>
-
 ---
 
 ## 📈 Contribution Graph
