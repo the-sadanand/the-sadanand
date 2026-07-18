@@ -1,0 +1,1753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sadanand Kumar — Infinity Nebula Profile</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --cyan: #00F2FE;
+    --cyan-dim: #00bcd4;
+    --gold: #FACC15;
+    --gold-dim: #d4a017;
+    --bg-0: #020817;
+    --bg-1: #0a1628;
+    --bg-2: #0f1f3d;
+    --bg-card: #0d1b30;
+    --text-primary: #E2E8F0;
+    --text-muted: #94a3b8;
+    --border: rgba(0, 242, 254, 0.15);
+    --glow-cyan: 0 0 20px rgba(0, 242, 254, 0.4), 0 0 60px rgba(0, 242, 254, 0.15);
+    --glow-gold: 0 0 20px rgba(250, 204, 21, 0.4), 0 0 60px rgba(250, 204, 21, 0.15);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-0);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── STARFIELD ── */
+  #starfield {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background: radial-gradient(ellipse at 20% 20%, rgba(0,242,254,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 80%, rgba(250,204,21,0.03) 0%, transparent 60%),
+                var(--bg-0);
+  }
+  .star {
+    position: absolute; border-radius: 50%; background: white;
+    animation: twinkle var(--d, 3s) infinite ease-in-out;
+  }
+  @keyframes twinkle {
+    0%,100% { opacity: var(--lo, 0.1); transform: scale(1); }
+    50%      { opacity: var(--hi, 0.8); transform: scale(1.3); }
+  }
+
+  /* ── LAYOUT ── */
+  .wrapper {
+    position: relative; z-index: 1;
+    max-width: 860px; margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    text-align: center;
+    padding: 72px 0 48px;
+  }
+
+  /* 3D ROTATING ORBS SYSTEM */
+  .orb-system {
+    position: relative;
+    width: 220px; height: 220px;
+    margin: 0 auto 40px;
+    perspective: 600px;
+  }
+  .orb-core {
+    position: absolute; inset: 50%; transform: translate(-50%,-50%);
+    width: 80px; height: 80px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #00F2FE, #0052cc 60%, #020817);
+    box-shadow: var(--glow-cyan);
+    animation: pulse-core 3s ease-in-out infinite;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Orbitron', monospace;
+    font-size: 12px; color: white; font-weight: 700; letter-spacing: 0.1em;
+    z-index: 10;
+  }
+  @keyframes pulse-core {
+    0%,100% { box-shadow: var(--glow-cyan); transform: translate(-50%,-50%) scale(1); }
+    50%      { box-shadow: 0 0 40px rgba(0,242,254,0.7), 0 0 100px rgba(0,242,254,0.3); transform: translate(-50%,-50%) scale(1.05); }
+  }
+
+  /* Ring 1 — cyan, tilted */
+  .ring {
+    position: absolute; inset: 0;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    animation: spin var(--spd, 6s) linear infinite;
+  }
+  .ring::before {
+    content: '';
+    position: absolute; inset: -2px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: var(--rc, #00F2FE);
+    border-right-color: var(--rc, #00F2FE);
+  }
+  .ring-1 {
+    --rc: #00F2FE; --spd: 5s;
+    transform: rotateX(70deg) rotateZ(0deg);
+    top: 20px; left: 20px; right: 20px; bottom: 20px;
+    filter: drop-shadow(0 0 6px #00F2FE);
+  }
+  .ring-2 {
+    --rc: #FACC15; --spd: 8s;
+    transform: rotateX(70deg) rotateY(60deg);
+    top: 10px; left: 10px; right: 10px; bottom: 10px;
+    animation-direction: reverse;
+    filter: drop-shadow(0 0 6px #FACC15);
+  }
+  .ring-3 {
+    --rc: rgba(0,242,254,0.4); --spd: 12s;
+    transform: rotateX(70deg) rotateY(120deg);
+    top: 0; left: 0; right: 0; bottom: 0;
+  }
+  @keyframes spin { to { transform: rotateX(70deg) rotateZ(360deg); } }
+
+  /* Orbiting dot */
+  .orbit-dot {
+    position: absolute; top: 50%; left: 50%;
+    width: 8px; height: 8px; border-radius: 50%;
+    margin: -4px 0 0 -4px;
+    background: var(--dc, #00F2FE);
+    box-shadow: 0 0 12px var(--dc, #00F2FE);
+    animation: orbit var(--ospd, 5s) linear infinite;
+    transform-origin: var(--or, 90px) 0;
+  }
+  .orbit-dot-1 { --dc: #00F2FE; --ospd: 5s;  --or: 90px; }
+  .orbit-dot-2 { --dc: #FACC15; --ospd: 8s;  --or: 100px; animation-direction: reverse; animation-delay: -2s; }
+  .orbit-dot-3 { --dc: #ffffff; --ospd: 11s; --or: 108px; animation-delay: -5s; }
+  @keyframes orbit { to { transform: rotate(360deg) translateX(var(--or, 90px)); } }
+
+  /* ── TITLE ── */
+  .hero-name {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 900;
+    background: linear-gradient(135deg, #00F2FE 0%, #a78bfa 40%, #FACC15 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 0.05em;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    animation: shimmer 4s ease-in-out infinite;
+    background-size: 200% auto;
+  }
+  @keyframes shimmer {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .hero-role {
+    font-family: 'Orbitron', monospace;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    color: var(--cyan-dim);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    opacity: 0.85;
+  }
+
+  .hero-tagline {
+    font-size: 14px;
+    color: var(--text-muted);
+    max-width: 520px;
+    margin: 0 auto 32px;
+    line-height: 1.7;
+    letter-spacing: 0.01em;
+  }
+
+  /* ── BADGE ROW ── */
+  .badge-row {
+    display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 14px; border-radius: 6px;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.05em;
+    text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid transparent;
+  }
+  .badge:hover { transform: translateY(-2px); }
+  .badge-li   { background: #0A66C2; color: white; }
+  .badge-li:hover { box-shadow: 0 4px 20px rgba(10,102,194,0.5); }
+  .badge-lc   { background: #FFA116; color: #1a1a1a; }
+  .badge-lc:hover { box-shadow: 0 4px 20px rgba(255,161,22,0.5); }
+  .badge-port { background: linear-gradient(135deg, #00F2FE, #0066ff); color: white; }
+  .badge-port:hover { box-shadow: var(--glow-cyan); }
+  .badge-gh   { background: #161B22; color: white; border-color: rgba(255,255,255,0.1); }
+  .badge-gh:hover { box-shadow: 0 4px 20px rgba(255,255,255,0.1); }
+
+  /* ── SECTION ── */
+  .section { margin: 48px 0; }
+  .section-label {
+    font-family: 'Orbitron', monospace;
+    font-size: 11px; letter-spacing: 0.35em;
+    color: var(--cyan); text-transform: uppercase;
+    margin-bottom: 6px; opacity: 0.7;
+  }
+  .section-title {
+    font-size: 22px; font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 24px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1; height: 1px;
+    background: linear-gradient(90deg, var(--border), transparent);
+  }
+
+  /* ── ABOUT CARDS ── */
+  .about-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+  }
+  .about-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .about-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(0,242,254,0.04), transparent);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .about-card:hover::before { opacity: 1; }
+  .about-card:hover {
+    border-color: rgba(0,242,254,0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(0,242,254,0.1);
+  }
+  .about-icon { font-size: 22px; margin-bottom: 8px; }
+  .about-label { font-size: 11px; color: var(--cyan); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
+  .about-value { font-size: 14px; font-weight: 500; color: var(--text-primary); line-height: 1.5; }
+
+  /* ── TECH STACK ── */
+  .stack-grid {
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .tech-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 14px; border-radius: 20px;
+    font-size: 12px; font-weight: 500;
+    border: 1px solid; transition: transform 0.2s, box-shadow 0.2s;
+    cursor: default;
+  }
+  .tech-pill:hover { transform: scale(1.06); }
+  .tp-python  { color: #4B9CD3; border-color: rgba(75,156,211,0.35); background: rgba(75,156,211,0.08); }
+  .tp-cpp     { color: #0080ff; border-color: rgba(0,128,255,0.35); background: rgba(0,128,255,0.08); }
+  .tp-pytorch { color: #EE4C2C; border-color: rgba(238,76,44,0.35); background: rgba(238,76,44,0.08); }
+  .tp-tf      { color: #FF6F00; border-color: rgba(255,111,0,0.35); background: rgba(255,111,0,0.08); }
+  .tp-fastapi { color: #009688; border-color: rgba(0,150,136,0.35); background: rgba(0,150,136,0.08); }
+  .tp-docker  { color: #2496ED; border-color: rgba(36,150,237,0.35); background: rgba(36,150,237,0.08); }
+  .tp-redis   { color: #DC382D; border-color: rgba(220,56,45,0.35); background: rgba(220,56,45,0.08); }
+  .tp-mlflow  { color: #0194E2; border-color: rgba(1,148,226,0.35); background: rgba(1,148,226,0.08); }
+  .tp-lc      { color: #1C9E6E; border-color: rgba(28,158,110,0.35); background: rgba(28,158,110,0.08); }
+  .tp-cv      { color: #9B59B6; border-color: rgba(155,89,182,0.35); background: rgba(155,89,182,0.08); }
+  .tp-n8n     { color: #EA4B71; border-color: rgba(234,75,113,0.35); background: rgba(234,75,113,0.08); }
+  .tp-sol     { color: #FACC15; border-color: rgba(250,204,21,0.35); background: rgba(250,204,21,0.08); }
+  .tp-react   { color: #61DAFB; border-color: rgba(97,218,251,0.35); background: rgba(97,218,251,0.08); }
+  .tp-yolo    { color: #00F2FE; border-color: rgba(0,242,254,0.35); background: rgba(0,242,254,0.08); }
+
+  /* ── PROJECT CARDS ── */
+  .project-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin-bottom: 16px;
+    transition: all 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .project-card::after {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--cyan), var(--gold), transparent);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .project-card:hover::after { opacity: 1; }
+  .project-card:hover {
+    border-color: rgba(0,242,254,0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,242,254,0.1), 0 4px 16px rgba(0,0,0,0.4);
+  }
+  .project-header {
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+    margin-bottom: 12px;
+  }
+  .project-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 16px; font-weight: 700;
+    color: var(--cyan); letter-spacing: 0.04em;
+  }
+  .project-tag {
+    font-size: 10px; padding: 3px 10px; border-radius: 12px;
+    border: 1px solid; white-space: nowrap; flex-shrink: 0;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .tag-ai     { color: #00F2FE; border-color: rgba(0,242,254,0.4); background: rgba(0,242,254,0.07); }
+  .tag-cv     { color: #a78bfa; border-color: rgba(167,139,250,0.4); background: rgba(167,139,250,0.07); }
+  .tag-web3   { color: #FACC15; border-color: rgba(250,204,21,0.4); background: rgba(250,204,21,0.07); }
+  .tag-port   { color: #4ade80; border-color: rgba(74,222,128,0.4); background: rgba(74,222,128,0.07); }
+  .project-desc {
+    font-size: 13px; color: var(--text-muted); margin-bottom: 14px;
+    line-height: 1.65; font-style: italic;
+  }
+  .project-bullets { list-style: none; }
+  .project-bullets li {
+    font-size: 13px; color: #cbd5e1;
+    padding: 3px 0 3px 18px; position: relative; line-height: 1.6;
+  }
+  .project-bullets li::before {
+    content: '▸';
+    position: absolute; left: 0;
+    color: var(--gold);
+  }
+  .stack-row {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px;
+    padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  .stack-chip {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; color: var(--text-muted);
+    background: rgba(255,255,255,0.04);
+    padding: 3px 9px; border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+
+  /* ── STATS SECTION ── */
+  .stats-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+  }
+  .stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px; padding: 22px 18px;
+    text-align: center;
+    transition: all 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .stat-card:hover {
+    border-color: rgba(0,242,254,0.4);
+    transform: scale(1.03);
+    box-shadow: var(--glow-cyan);
+  }
+  .stat-value {
+    font-family: 'Orbitron', monospace;
+    font-size: 32px; font-weight: 900;
+    background: linear-gradient(135deg, var(--cyan), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    line-height: 1; margin-bottom: 6px;
+    animation: count-glow 2s ease-in-out infinite;
+  }
+  @keyframes count-glow {
+    0%,100% { filter: brightness(1); }
+    50%      { filter: brightness(1.2); }
+  }
+  .stat-label { font-size: 11px; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; }
+
+  /* ── PROXY FIX NOTICE ── */
+  .proxy-notice {
+    background: linear-gradient(135deg, rgba(250,204,21,0.06), rgba(0,242,254,0.04));
+    border: 1px solid rgba(250,204,21,0.25);
+    border-radius: 10px; padding: 16px 20px;
+    margin-bottom: 16px;
+  }
+  .proxy-notice h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; color: var(--gold); margin-bottom: 8px;
+    letter-spacing: 0.05em;
+  }
+  .proxy-notice p { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+  .proxy-notice code {
+    font-family: 'JetBrains Mono', monospace;
+    background: rgba(0,242,254,0.1); color: var(--cyan);
+    padding: 1px 6px; border-radius: 3px; font-size: 11px;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline { position: relative; padding-left: 24px; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 0; top: 8px; bottom: 0; width: 1px;
+    background: linear-gradient(180deg, var(--cyan), var(--gold), transparent);
+  }
+  .tl-item {
+    position: relative; margin-bottom: 24px;    padding-left: 16px;
+  }
+  .tl-item::before {
+    content: '';
+    position: absolute; left: -20px; top: 6px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--cyan);
+    box-shadow: 0 0 10px var(--cyan);
+  }
+  .tl-year {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--gold); letter-spacing: 0.1em;
+    margin-bottom: 3px;
+  }
+  .tl-title { font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 3px; }
+  .tl-sub   { font-size: 12px; color: var(--text-muted); }
+
+  /* ── CONNECT SECTION ── */
+  .connect-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;
+  }
+  .connect-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px; padding: 16px 18px;
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none; color: var(--text-primary);
+    transition: all 0.3s;
+  }
+  .connect-card:hover {
+    border-color: var(--cyan);
+    transform: translateY(-3px);
+    box-shadow: var(--glow-cyan);
+  }
+  .connect-icon { font-size: 22px; flex-shrink: 0; }
+  .connect-label { font-size: 11px; color: var(--text-muted); letter-spacing: 0.05em; }
+  .connect-name  { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center; padding: 48px 0 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 64px;
+  }
+  .footer-wave {
+    font-family: 'Orbitron', monospace;
+    font-size: 11px; letter-spacing: 0.4em;
+    color: var(--text-muted); text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .footer-copy { font-size: 12px; color: rgba(148,163,184,0.4); }
+
+  /* ── FLOATING PARTICLES ── */
+  .particle {
+    position: fixed; pointer-events: none; border-radius: 50%;
+    animation: float-up var(--dur, 12s) linear infinite;
+    opacity: 0;
+  }
+  @keyframes float-up {
+    0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+    10%  { opacity: 0.6; }
+    90%  { opacity: 0.3; }
+    100% { transform: translateY(-20px) scale(1); opacity: 0; }
+  }
+
+  /* ── 3D CUBE DECORATION ── */
+  .cube-wrap {
+    perspective: 400px;
+    width: 40px; height: 40px;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .cube {
+    width: 24px; height: 24px;
+    transform-style: preserve-3d;
+    animation: spin-cube 6s linear infinite;
+    position: relative;
+  }
+  .cube-face {
+    position: absolute; inset: 0;
+    border: 1px solid rgba(0,242,254,0.5);
+    background: rgba(0,242,254,0.04);
+  }
+  .cube-face.front  { transform: translateZ(12px); }
+  .cube-face.back   { transform: translateZ(-12px) rotateY(180deg); }
+  .cube-face.left   { transform: translateX(-12px) rotateY(-90deg); }
+  .cube-face.right  { transform: translateX(12px) rotateY(90deg); }
+  .cube-face.top    { transform: translateY(-12px) rotateX(90deg); }
+  .cube-face.bottom { transform: translateY(12px) rotateX(-90deg); }
+  @keyframes spin-cube {
+    from { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+    to   { transform: rotateX(360deg) rotateY(240deg) rotateZ(120deg); }
+  }
+
+  /* Divider */
+  .divider {
+    height: 1px; margin: 40px 0;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .stats-grid .stat-card:last-child { grid-column: span 2; }
+    .orb-system { width: 160px; height: 160px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- STARFIELD -->
+<div id="starfield"></div>
+
+<!-- FLOATING PARTICLES -->
+<div id="particles"></div>
+
+<div class="wrapper">
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
+
+    <!-- 3D ORB SYSTEM -->
+    <div class="orb-system">
+      <div class="ring ring-1"></div>
+      <div class="ring ring-2"></div>
+      <div class="ring ring-3"></div>
+      <div class="orbit-dot orbit-dot-1"></div>
+      <div class="orbit-dot orbit-dot-2"></div>
+      <div class="orbit-dot orbit-dot-3"></div>
+      <div class="orb-core">SK</div>
+    </div>
+
+    <h1 class="hero-name">Sadanand Kumar</h1>
+    <p class="hero-role">Machine Learning Engineer · Computer Vision · MLOps</p>
+    <p class="hero-tagline">
+      Bridging scalable AI architectures, high-performance Computer Vision engines,
+      and infinity-streaming infrastructure layers.
+    </p>
+
+    <div class="badge-row">
+      <a class="badge badge-li" href="https://www.linkedin.com/in/sadanand-k7" target="_blank">💼 LinkedIn</a>
+      <a class="badge badge-lc" href="https://leetcode.com/sadanandkr7/" target="_blank">⚡ LeetCode</a>
+      <a class="badge badge-port" href="https://my-portfolio-sadanand.vercel.app/" target="_blank">🌐 Portfolio</a>
+      <a class="badge badge-gh" href="https://github.com/the-sadanand" target="_blank">🐙 GitHub</a>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ═══ ABOUT ═══ -->
+  <section class="section">
+    <p class="section-label">// profile</p>
+    <h2 class="section-title">🧬 About Me</h2>
+    <div class="about-grid">
+      <div class="about-card">
+        <div class="about-icon">🎓</div>
+        <div class="about-label">Education</div>
+        <div class="about-value">B.Tech CSE — AI & ML<br/>CGPA: <strong style="color:var(--gold)">8.33</strong></div>
+      </div>
+      <div class="about-card">
+        <div class="about-icon">🏛️</div>
+        <div class="about-label">Institution</div>
+        <div class="about-value">Aditya College of Engineering & Technology</div>
+      </div>
+      <div class="about-card">
+        <div class="about-icon">🧠</div>
+        <div class="about-label">Core Focus</div>
+        <div class="about-value">YOLOv8 · LangChain RAG · FastAPI · Celery · Redis</div>
+      </div>
+      <div class="about-card">
+        <div class="about-icon">🛠️</div>
+        <div class="about-label">Currently</div>
+        <div class="about-value">Millisecond inference optimization · Docker MLOps</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ STATS ═══ -->
+  <section class="section">
+    <p class="section-label">// metrics</p>
+    <h2 class="section-title">📊 At a Glance</h2>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value">8.33</div>
+        <div class="stat-label">CGPA</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">4+</div>
+        <div class="stat-label">Production Projects</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">7+</div>
+        <div class="stat-label">Core Technologies</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TECH STACK ═══ -->
+  <section class="section">
+    <p class="section-label">// technologies</p>
+    <h2 class="section-title">🛠️ Core Tech Stack</h2>
+    <div class="stack-grid">
+      <span class="tech-pill tp-python">🐍 Python</span>
+      <span class="tech-pill tp-cpp">⚙️ C++</span>
+      <span class="tech-pill tp-pytorch">🔥 PyTorch</span>
+      <span class="tech-pill tp-tf">🧠 TensorFlow</span>
+      <span class="tech-pill tp-yolo">👁️ YOLOv8</span>
+      <span class="tech-pill tp-cv">🎯 OpenCV</span>
+      <span class="tech-pill tp-fastapi">⚡ FastAPI</span>
+      <span class="tech-pill tp-lc">🔗 LangChain</span>
+      <span class="tech-pill tp-docker">🐳 Docker</span>
+      <span class="tech-pill tp-redis">🔴 Redis</span>
+      <span class="tech-pill tp-mlflow">📈 MLflow</span>
+      <span class="tech-pill tp-n8n">🤖 n8n</span>
+      <span class="tech-pill tp-sol">💎 Solidity</span>
+      <span class="tech-pill tp-react">⚛️ React</span>
+    </div>
+  </section>
+
+  <!-- ═══ PROJECTS ═══ -->
+  <section class="section">
+    <p class="section-label">// engineering</p>
+    <h2 class="section-title">🏗️ Featured Projects</h2>
+
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-title">⚡ Telegram OpenClaw AI</div>
+        <span class="project-tag tag-ai">LLM / RAG</span>
+      </div>
+      <p class="project-desc">Intelligent pedagogical assistant with memory-mapped context extraction and real-time token streaming.</p>
+      <ul class="project-bullets">
+        <li>Custom LLM threads in FastAPI pipelines — async real-time token streaming</li>
+        <li>LangChain memory-mapped context for persistent conversational state</li>
+        <li>Fully local via Ollama + Docker Compose — zero cloud dependency</li>
+      </ul>
+      <div class="stack-row">
+        <span class="stack-chip">Python</span>
+        <span class="stack-chip">FastAPI</span>
+        <span class="stack-chip">LangChain</span>
+        <span class="stack-chip">Ollama</span>
+        <span class="stack-chip">n8n</span>
+        <span class="stack-chip">Docker</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-title">👁️ Distributed Async Inference</div>
+        <span class="project-tag tag-cv">Computer Vision</span>
+      </div>
+      <p class="project-desc">Decoupled high-concurrency CV inference engine built for peak-load robustness.</p>
+      <ul class="project-bullets">
+        <li>Heavy model compute decoupled from core API worker loops</li>
+        <li>Celery task queue + Redis message broker for maximum throughput</li>
+        <li>YOLOv8 real-time object detection at millisecond latency</li>
+      </ul>
+      <div class="stack-row">
+        <span class="stack-chip">FastAPI</span>
+        <span class="stack-chip">Celery</span>
+        <span class="stack-chip">Redis</span>
+        <span class="stack-chip">YOLOv8</span>
+        <span class="stack-chip">Docker</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-title">🪙 Blockchain Faucet DApp</div>
+        <span class="project-tag tag-web3">Web3</span>
+      </div>
+      <p class="project-desc">Full-stack decentralized application with Solidity smart contracts and React frontend.</p>
+      <ul class="project-bullets">
+        <li>Solidity smart contracts compiled and deployed via Hardhat</li>
+        <li>React + Web3.js wallet integration for seamless UX</li>
+        <li>Containerized full stack with Docker Compose</li>
+      </ul>
+      <div class="stack-row">
+        <span class="stack-chip">Solidity</span>
+        <span class="stack-chip">Hardhat</span>
+        <span class="stack-chip">React</span>
+        <span class="stack-chip">Web3.js</span>
+        <span class="stack-chip">Docker</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-title">🌐 Infinity Nebula Portfolio</div>
+        <span class="project-tag tag-port">React + Vite</span>
+      </div>
+      <p class="project-desc">Personal portfolio with custom animations, sub-second load, and continuous deployment.</p>
+      <ul class="project-bullets">
+        <li>Vite bundler optimizations for sub-second load times</li>
+        <li>Responsive design with custom CSS animation system</li>
+        <li>CD pipeline via Vercel on every push</li>
+      </ul>
+      <div class="stack-row">
+        <span class="stack-chip">React</span>
+        <span class="stack-chip">Vite</span>
+        <span class="stack-chip">Tailwind CSS</span>
+        <span class="stack-chip">Vercel</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PROXY FIX NOTICE ═══ -->
+  <section class="section">
+    <p class="section-label">// dev notes</p>
+    <h2 class="section-title">💡 About the Stats Cards</h2>
+
+    <div class="proxy-notice">
+      <h4>⚠ GitHub Camo Proxy Cache Fix</h4>
+      <p>
+        The public <code>github-readme-stats</code> instances are heavily rate-limited.
+        When GitHub's Camo proxy gets a <code>504 Gateway Timeout</code> or <code>429 Too Many Requests</code>,
+        it caches the failure until the TTL expires — this is called <strong>cache poisoning</strong>.
+        <br/><br/>
+        The README uses <code>streak-stats.demolab.com</code> (maintained by DenverCoder9 with
+        dedicated infrastructure) and appends <code>&cache_seconds=86400</code> to reduce re-fetches.
+        If cards still break, hard-refresh (<code>Ctrl+Shift+R</code>) or wait ~1 hour for cache TTL.
+        <br/><br/>
+        The long-term fix is to <strong>self-host</strong> your own <code>github-readme-stats</code>
+        instance on Vercel (free) and point the image URLs to your own deployment.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══ TIMELINE ═══ -->
+  <section class="section">
+    <p class="section-label">// journey</p>
+    <h2 class="section-title">📅 Timeline</h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-year">2024 — INTERNSHIP</div>
+        <div class="tl-title">ML Trainee — NIELIT Gorakhpur</div>
+        <div class="tl-sub">Python · Data Science · NLP · Deep Learning · Movie Recommender System</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2024 — PROJECT</div>
+        <div class="tl-title">Telegram OpenClaw AI Learning Assistant</div>
+        <div class="tl-sub">FastAPI · LangChain · Ollama · Docker · n8n</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2025 — PROJECT</div>
+        <div class="tl-title">Distributed Async AI Inference Service</div>
+        <div class="tl-sub">YOLOv8 · Celery · Redis · FastAPI · Docker</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2025 — PROJECT</div>
+        <div class="tl-title">Blockchain Faucet DApp + NimbusGrid Architecture</div>
+        <div class="tl-sub">Solidity · Hardhat · React · Decentralized Edge Cloud Design</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2026 — PRESENT</div>
+        <div class="tl-title">Final Year · Seeking ML Engineering Roles</div>
+        <div class="tl-sub">Open to opportunities in Computer Vision, LLM, and MLOps</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CONNECT ═══ -->
+  <section class="section">
+    <p class="section-label">// contact</p>
+    <h2 class="section-title">🌐 Connect</h2>
+    <div class="connect-grid">
+      <a class="connect-card" href="https://www.linkedin.com/in/sadanand-k7" target="_blank">
+        <span class="connect-icon">💼</span>
+        <div><div class="connect-label">LinkedIn</div><div class="connect-name">sadanand-k7</div></div>
+      </a>
+      <a class="connect-card" href="https://leetcode.com/sadanandkr7/" target="_blank">
+        <span class="connect-icon">⚡</span>
+        <div><div class="connect-label">LeetCode</div><div class="connect-name">sadanandkr7</div></div>
+      </a>
+      <a class="connect-card" href="https://my-portfolio-sadanand.vercel.app/" target="_blank">
+        <span class="connect-icon">🌌</span>
+        <div><div class="connect-label">Portfolio</div><div class="connect-name">Infinity Nebula</div></div>
+      </a>
+      <a class="connect-card" href="https://github.com/the-sadanand" target="_blank">
+        <span class="connect-icon">🐙</span>
+        <div><div class="connect-label">GitHub</div><div class="connect-name">the-sadanand</div></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="footer">
+    <div class="footer-wave">∞ · Infinity Nebula · ∞</div>
+    <div class="footer-copy">Engineered with precision by Sadanand Kumar · © 2026</div>
+  </footer>
+
+</div><!-- /wrapper -->
+
+<script>
+/* ── STARFIELD ── */
+const sf = document.getElementById('starfield');
+for (let i = 0; i < 180; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  const sz = Math.random() * 2.5 + 0.5;
+  const dur = (Math.random() * 4 + 2).toFixed(1);
+  const lo  = (Math.random() * 0.15 + 0.05).toFixed(2);
+  const hi  = (Math.random() * 0.6 + 0.3).toFixed(2);
+  const del = -(Math.random() * 6).toFixed(1);
+  s.style.cssText = `
+    width:${sz}px; height:${sz}px;
+    top:${Math.random()*100}%; left:${Math.random()*100}%;
+    --d:${dur}s; --lo:${lo}; --hi:${hi};
+    animation-delay:${del}s;
+  `;
+  sf.appendChild(s);
+}
+
+/* ── PARTICLES ── */
+const pc = document.getElementById('particles');
+const pColors = ['rgba(0,242,254,0.6)', 'rgba(250,204,21,0.5)', 'rgba(167,139,250,0.4)'];
+for (let i = 0; i < 18; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  const sz = Math.random() * 3 + 1;
+  p.style.cssText = `
+    width:${sz}px; height:${sz}px;
+    background:${pColors[Math.floor(Math.random()*3)]};
+    left:${Math.random()*100}%;
+    --dur:${(Math.random()*14+8).toFixed(0)}s;
+    animation-delay:-${(Math.random()*14).toFixed(1)}s;
+  `;
+  pc.appendChild(p);
+}
+
+/* ── INTERSECTION OBSERVER — fade-in sections ── */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.section, .project-card, .about-card, .stat-card').forEach(el => {
+  el.style.cssText += 'opacity:0; transform:translateY(20px); transition:opacity 0.6s ease, transform 0.6s ease;';
+  observer.observe(el);
+});
+
+/* ── COUNTER ANIMATION ── */
+function animateCount(el, target, decimals = 0, suffix = '') {
+  let start = 0;
+  const duration = 1800;
+  const step = timestamp => {
+    if (!start) start = timestamp;
+    const progress = Math.min((timestamp - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const val = target * eased;
+    el.textContent = decimals ? val.toFixed(decimals) + suffix : Math.round(val) + suffix;
+    if (progress < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
+const statObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const vals = [8.33, 4, 7];
+      const decs = [2, 0, 0];
+      const suf  = ['', '+', '+'];
+      e.target.querySelectorAll('.stat-value').forEach((el, i) => {
+        animateCount(el, vals[i], decs[i], suf[i]);
+      });
+      statObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+const statsGrid = document.querySelector('.stats-grid');
+if (statsGrid) statObserver.observe(statsGrid);
+</script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sadanand Kumar — Infinity Nebula Profile</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --cyan: #00F2FE;
+    --cyan-dim: #00bcd4;
+    --gold: #FACC15;
+    --gold-dim: #d4a017;
+    --bg-0: #020817;
+    --bg-1: #0a1628;
+    --bg-2: #0f1f3d;
+    --bg-card: #0d1b30;
+    --text-primary: #E2E8F0;
+    --text-muted: #94a3b8;
+    --border: rgba(0, 242, 254, 0.15);
+    --glow-cyan: 0 0 20px rgba(0, 242, 254, 0.4), 0 0 60px rgba(0, 242, 254, 0.15);
+    --glow-gold: 0 0 20px rgba(250, 204, 21, 0.4), 0 0 60px rgba(250, 204, 21, 0.15);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-0);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── STARFIELD ── */
+  #starfield {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background: radial-gradient(ellipse at 20% 20%, rgba(0,242,254,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 80%, rgba(250,204,21,0.03) 0%, transparent 60%),
+                var(--bg-0);
+  }
+  .star {
+    position: absolute; border-radius: 50%; background: white;
+    animation: twinkle var(--d, 3s) infinite ease-in-out;
+  }
+  @keyframes twinkle {
+    0%,100% { opacity: var(--lo, 0.1); transform: scale(1); }
+    50%      { opacity: var(--hi, 0.8); transform: scale(1.3); }
+  }
+
+  /* ── LAYOUT ── */
+  .wrapper {
+    position: relative; z-index: 1;
+    max-width: 860px; margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    text-align: center;
+    padding: 72px 0 48px;
+  }
+
+  /* 3D ROTATING ORBS SYSTEM */
+  .orb-system {
+    position: relative;
+    width: 220px; height: 220px;
+    margin: 0 auto 40px;
+    perspective: 600px;
+  }
+  .orb-core {
+    position: absolute; inset: 50%; transform: translate(-50%,-50%);
+    width: 80px; height: 80px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #00F2FE, #0052cc 60%, #020817);
+    box-shadow: var(--glow-cyan);
+    animation: pulse-core 3s ease-in-out infinite;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Orbitron', monospace;
+    font-size: 12px; color: white; font-weight: 700; letter-spacing: 0.1em;
+    z-index: 10;
+  }
+  @keyframes pulse-core {
+    0%,100% { box-shadow: var(--glow-cyan); transform: translate(-50%,-50%) scale(1); }
+    50%      { box-shadow: 0 0 40px rgba(0,242,254,0.7), 0 0 100px rgba(0,242,254,0.3); transform: translate(-50%,-50%) scale(1.05); }
+  }
+
+  /* Ring 1 — cyan, tilted */
+  .ring {
+    position: absolute; inset: 0;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    animation: spin var(--spd, 6s) linear infinite;
+  }
+  .ring::before {
+    content: '';
+    position: absolute; inset: -2px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: var(--rc, #00F2FE);
+    border-right-color: var(--rc, #00F2FE);
+  }
+  .ring-1 {
+    --rc: #00F2FE; --spd: 5s;
+    transform: rotateX(70deg) rotateZ(0deg);
+    top: 20px; left: 20px; right: 20px; bottom: 20px;
+    filter: drop-shadow(0 0 6px #00F2FE);
+  }
+  .ring-2 {
+    --rc: #FACC15; --spd: 8s;
+    transform: rotateX(70deg) rotateY(60deg);
+    top: 10px; left: 10px; right: 10px; bottom: 10px;
+    animation-direction: reverse;
+    filter: drop-shadow(0 0 6px #FACC15);
+  }
+  .ring-3 {
+    --rc: rgba(0,242,254,0.4); --spd: 12s;
+    transform: rotateX(70deg) rotateY(120deg);
+    top: 0; left: 0; right: 0; bottom: 0;
+  }
+  @keyframes spin { to { transform: rotateX(70deg) rotateZ(360deg); } }
+
+  /* Orbiting dot */
+  .orbit-dot {
+    position: absolute; top: 50%; left: 50%;
+    width: 8px; height: 8px; border-radius: 50%;
+    margin: -4px 0 0 -4px;
+    background: var(--dc, #00F2FE);
+    box-shadow: 0 0 12px var(--dc, #00F2FE);
+    animation: orbit var(--ospd, 5s) linear infinite;
+    transform-origin: var(--or, 90px) 0;
+  }
+  .orbit-dot-1 { --dc: #00F2FE; --ospd: 5s;  --or: 90px; }
+  .orbit-dot-2 { --dc: #FACC15; --ospd: 8s;  --or: 100px; animation-direction: reverse; animation-delay: -2s; }
+  .orbit-dot-3 { --dc: #ffffff; --ospd: 11s; --or: 108px; animation-delay: -5s; }
+  @keyframes orbit { to { transform: rotate(360deg) translateX(var(--or, 90px)); } }
+
+  /* ── TITLE ── */
+  .hero-name {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 900;
+    background: linear-gradient(135deg, #00F2FE 0%, #a78bfa 40%, #FACC15 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 0.05em;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    animation: shimmer 4s ease-in-out infinite;
+    background-size: 200% auto;
+  }
+  @keyframes shimmer {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .hero-role {
+    font-family: 'Orbitron', monospace;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    color: var(--cyan-dim);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    opacity: 0.85;
+  }
+
+  .hero-tagline {
+    font-size: 14px;
+    color: var(--text-muted);
+    max-width: 520px;
+    margin: 0 auto 32px;
+    line-height: 1.7;
+    letter-spacing: 0.01em;
+  }
+
+  /* ── BADGE ROW ── */
+  .badge-row {
+    display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 14px; border-radius: 6px;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.05em;
+    text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid transparent;
+  }
+  .badge:hover { transform: translateY(-2px); }
+  .badge-li   { background: #0A66C2; color: white; }
+  .badge-li:hover { box-shadow: 0 4px 20px rgba(10,102,194,0.5); }
+  .badge-lc   { background: #FFA116; color: #1a1a1a; }
+  .badge-lc:hover { box-shadow: 0 4px 20px rgba(255,161,22,0.5); }
+  .badge-port { background: linear-gradient(135deg, #00F2FE, #0066ff); color: white; }
+  .badge-port:hover { box-shadow: var(--glow-cyan); }
+  .badge-gh   { background: #161B22; color: white; border-color: rgba(255,255,255,0.1); }
+  .badge-gh:hover { box-shadow: 0 4px 20px rgba(255,255,255,0.1); }
+
+  /* ── SECTION ── */
+  .section { margin: 48px 0; }
+  .section-label {
+    font-family: 'Orbitron', monospace;
+    font-size: 11px; letter-spacing: 0.35em;
+    color: var(--cyan); text-transform: uppercase;
+    margin-bottom: 6px; opacity: 0.7;
+  }
+  .section-title {
+    font-size: 22px; font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 24px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1; height: 1px;
+    background: linear-gradient(90deg, var(--border), transparent);
+  }
+
+  /* ── ABOUT CARDS ── */
+  .about-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+  }
+  .about-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .about-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(0,242,254,0.04), transparent);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .about-card:hover::before { opacity: 1; }
+  .about-card:hover {
+    border-color: rgba(0,242,254,0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(0,242,254,0.1);
+  }
+  .about-icon { font-size: 22px; margin-bottom: 8px; }
+  .about-label { font-size: 11px; color: var(--cyan); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
+  .about-value { font-size: 14px; font-weight: 500; color: var(--text-primary); line-height: 1.5; }
+
+  /* ── TECH STACK ── */
+  .stack-grid {
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .tech-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 14px; border-radius: 20px;
+    font-size: 12px; font-weight: 500;
+    border: 1px solid; transition: transform 0.2s, box-shadow 0.2s;
+    cursor: default;
+  }
+  .tech-pill:hover { transform: scale(1.06); }
+  .tp-python  { color: #4B9CD3; border-color: rgba(75,156,211,0.35); background: rgba(75,156,211,0.08); }
+  .tp-cpp     { color: #0080ff; border-color: rgba(0,128,255,0.35); background: rgba(0,128,255,0.08); }
+  .tp-pytorch { color: #EE4C2C; border-color: rgba(238,76,44,0.35); background: rgba(238,76,44,0.08); }
+  .tp-tf      { color: #FF6F00; border-color: rgba(255,111,0,0.35); background: rgba(255,111,0,0.08); }
+  .tp-fastapi { color: #009688; border-color: rgba(0,150,136,0.35); background: rgba(0,150,136,0.08); }
+  .tp-docker  { color: #2496ED; border-color: rgba(36,150,237,0.35); background: rgba(36,150,237,0.08); }
+  .tp-redis   { color: #DC382D; border-color: rgba(220,56,45,0.35); background: rgba(220,56,45,0.08); }
+  .tp-mlflow  { color: #0194E2; border-color: rgba(1,148,226,0.35); background: rgba(1,148,226,0.08); }
+  .tp-lc      { color: #1C9E6E; border-color: rgba(28,158,110,0.35); background: rgba(28,158,110,0.08); }
+  .tp-cv      { color: #9B59B6; border-color: rgba(155,89,182,0.35); background: rgba(155,89,182,0.08); }
+  .tp-n8n     { color: #EA4B71; border-color: rgba(234,75,113,0.35); background: rgba(234,75,113,0.08); }
+  .tp-sol     { color: #FACC15; border-color: rgba(250,204,21,0.35); background: rgba(250,204,21,0.08); }
+  .tp-react   { color: #61DAFB; border-color: rgba(97,218,251,0.35); background: rgba(97,218,251,0.08); }
+  .tp-yolo    { color: #00F2FE; border-color: rgba(0,242,254,0.35); background: rgba(0,242,254,0.08); }
+
+  /* ── PROJECT CARDS ── */
+  .project-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin-bottom: 16px;
+    transition: all 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .project-card::after {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--cyan), var(--gold), transparent);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .project-card:hover::after { opacity: 1; }
+  .project-card:hover {
+    border-color: rgba(0,242,254,0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,242,254,0.1), 0 4px 16px rgba(0,0,0,0.4);
+  }
+  .project-header {
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+    margin-bottom: 12px;
+  }
+  .project-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 16px; font-weight: 700;
+    color: var(--cyan); letter-spacing: 0.04em;
+  }
+  .project-tag {
+    font-size: 10px; padding: 3px 10px; border-radius: 12px;
+    border: 1px solid; white-space: nowrap; flex-shrink: 0;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .tag-ai     { color: #00F2FE; border-color: rgba(0,242,254,0.4); background: rgba(0,242,254,0.07); }
+  .tag-cv     { color: #a78bfa; border-color: rgba(167,139,250,0.4); background: rgba(167,139,250,0.07); }
+  .tag-web3   { color: #FACC15; border-color: rgba(250,204,21,0.4); background: rgba(250,204,21,0.07); }
+  .tag-port   { color: #4ade80; border-color: rgba(74,222,128,0.4); background: rgba(74,222,128,0.07); }
+  .project-desc {
+    font-size: 13px; color: var(--text-muted); margin-bottom: 14px;
+    line-height: 1.65; font-style: italic;
+  }
+  .project-bullets { list-style: none; }
+  .project-bullets li {
+    font-size: 13px; color: #cbd5e1;
+    padding: 3px 0 3px 18px; position: relative; line-height: 1.6;
+  }
+  .project-bullets li::before {
+    content: '▸';
+    position: absolute; left: 0;
+    color: var(--gold);
+  }
+  .stack-row {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px;
+    padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  .stack-chip {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; color: var(--text-muted);
+    background: rgba(255,255,255,0.04);
+    padding: 3px 9px; border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+
+  /* ── STATS SECTION ── */
+  .stats-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+  }
+  .stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px; padding: 22px 18px;
+    text-align: center;
+    transition: all 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .stat-card:hover {
+    border-color: rgba(0,242,254,0.4);
+    transform: scale(1.03);
+    box-shadow: var(--glow-cyan);
+  }
+  .stat-value {
+    font-family: 'Orbitron', monospace;
+    font-size: 32px; font-weight: 900;
+    background: linear-gradient(135deg, var(--cyan), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    line-height: 1; margin-bottom: 6px;
+    animation: count-glow 2s ease-in-out infinite;
+  }
+  @keyframes count-glow {
+    0%,100% { filter: brightness(1); }
+    50%      { filter: brightness(1.2); }
+  }
+  .stat-label { font-size: 11px; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; }
+
+  /* ── PROXY FIX NOTICE ── */
+  .proxy-notice {
+    background: linear-gradient(135deg, rgba(250,204,21,0.06), rgba(0,242,254,0.04));
+    border: 1px solid rgba(250,204,21,0.25);
+    border-radius: 10px; padding: 16px 20px;
+    margin-bottom: 16px;
+  }
+  .proxy-notice h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; color: var(--gold); margin-bottom: 8px;
+    letter-spacing: 0.05em;
+  }
+  .proxy-notice p { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+  .proxy-notice code {
+    font-family: 'JetBrains Mono', monospace;
+    background: rgba(0,242,254,0.1); color: var(--cyan);
+    padding: 1px 6px; border-radius: 3px; font-size: 11px;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline { position: relative; padding-left: 24px; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 0; top: 8px; bottom: 0; width: 1px;
+    background: linear-gradient(180deg, var(--cyan), var(--gold), transparent);
+  }
+  .tl-item {
+    position: relative; margin-bottom: 24px;
+    padding-left: 16px;
+  }
+  .tl-item::before {
+    content: '';
+    position: absolute; left: -20px; top: 6px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--cyan);
+    box-shadow: 0 0 10px var(--cyan);
+  }
+  .tl-year {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--gold); letter-spacing: 0.1em;
+    margin-bottom: 3px;
+  }
+  .tl-title { font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 3px; }
+  .tl-sub   { font-size: 12px; color: var(--text-muted); }
+
+  /* ── CONNECT SECTION ── */
+  .connect-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;
+  }
+  .connect-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px; padding: 16px 18px;
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none; color: var(--text-primary);
+    transition: all 0.3s;
+  }
+  .connect-card:hover {
+    border-color: var(--cyan);
+    transform: translateY(-3px);
+    box-shadow: var(--glow-cyan);
+  }
+  .connect-icon { font-size: 22px; flex-shrink: 0; }
+  .connect-label { font-size: 11px; color: var(--text-muted); letter-spacing: 0.05em; }
+  .connect-name  { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center; padding: 48px 0 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 64px;
+  }
+  .footer-wave {
+    font-family: 'Orbitron', monospace;
+    font-size: 11px; letter-spacing: 0.4em;
+    color: var(--text-muted); text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .footer-copy { font-size: 12px; color: rgba(148,163,184,0.4); }
+
+  /* ── FLOATING PARTICLES ── */
+  .particle {
+    position: fixed; pointer-events: none; border-radius: 50%;
+    animation: float-up var(--dur, 12s) linear infinite;
+    opacity: 0;
+  }
+  @keyframes float-up {
+    0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+    10%  { opacity: 0.6; }
+    90%  { opacity: 0.3; }
+    100% { transform: translateY(-20px) scale(1); opacity: 0; }
+  }
+
+  /* ── 3D CUBE DECORATION ── */
+  .cube-wrap {
+    perspective: 400px;
+    width: 40px; height: 40px;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .cube {
+    width: 24px; height: 24px;
+    transform-style: preserve-3d;
+    animation: spin-cube 6s linear infinite;
+    position: relative;
+  }
+  .cube-face {
+    position: absolute; inset: 0;
+    border: 1px solid rgba(0,242,254,0.5);
+    background: rgba(0,242,254,0.04);
+  }
+  .cube-face.front  { transform: translateZ(12px); }
+  .cube-face.back   { transform: translateZ(-12px) rotateY(180deg); }
+  .cube-face.left   { transform: translateX(-12px) rotateY(-90deg); }
+  .cube-face.right  { transform: translateX(12px) rotateY(90deg); }
+  .cube-face.top    { transform: translateY(-12px) rotateX(90deg); }
+  .cube-face.bottom { transform: translateY(12px) rotateX(-90deg); }
+  @keyframes spin-cube {
+    from { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+    to   { transform: rotateX(360deg) rotateY(240deg) rotateZ(120deg); }
+  }
+
+  /* Divider */
+  .divider {
+    height: 1px; margin: 40px 0;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .stats-grid .stat-card:last-child { grid-column: span 2; }
+    .orb-system { width: 160px; height: 160px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- STARFIELD -->
+<div id="starfield"></div>
+
+<!-- FLOATING PARTICLES -->
+<div id="particles"></div>
+
+<div class="wrapper">
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
+
+    <!-- 3D ORB SYSTEM -->
+    <div class="orb-system">
+      <div class="ring ring-1"></div>
+      <div class="ring ring-2"></div>
+      <div class="ring ring-3"></div>
+      <div class="orbit-dot orbit-dot-1"></div>
+      <div class="orbit-dot orbit-dot-2"></div>
+      <div class="orbit-dot orbit-dot-3"></div>
+      <div class="orb-core">SK</div>
+    </div>
+
+    <h1 class="hero-name">Sadanand Kumar</h1>
+    <p class="hero-role">Machine Learning Engineer · Computer Vision · MLOps</p>
+    <p class="hero-tagline">
+      Bridging scalable AI architectures, high-performance Computer Vision engines,
+      and infinity-streaming infrastructure layers.
+    </p>
+
+    <div class="badge-row">
+      <a class="badge badge-li" href="https://www.linkedin.com/in/sadanand-k7" target="_blank">💼 LinkedIn</a>
+      <a class="badge badge-lc" href="https://leetcode.com/sadanandkr7/" target="_blank">⚡ LeetCode</a>
+      <a class="badge badge-port" href="https://my-portfolio-sadanand.vercel.app/" target="_blank">🌐 Portfolio</a>
+      <a class="badge badge-gh" href="https://github.com/the-sadanand" target="_blank">🐙 GitHub</a>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ═══ ABOUT ═══ -->
+  <section class="section">
+    <p class="section-label">// profile</p>
+    <h2 class="section-title">🧬 About Me</h2>
+    <div class="about-grid">
+      <div class="about-card">
+        <div class="about-icon">🎓</div>
+        <div class="about-label">Education</div>
+        <div class="about-value">B.Tech CSE — AI & ML<br/>CGPA: <strong style="color:var(--gold)">8.33</strong></div>
+      </div>
+      <div class="about-card">
+        <div class="about-icon">🏛️</div>
+        <div class="about-label">Institution</div>
+        <div class="about-value">Aditya College of Engineering & Technology</div>
+      </div>
+      <div class="about-card">
+        <div class="about-icon">🧠</div>
+        <div class="about-label">Core Focus</div>
+        <div class="about-value">YOLOv8 · LangChain RAG · FastAPI · Celery · Redis</div>
+      </div>
+      <div class="about-card">
+        <div class="about-icon">🛠️</div>
+        <div class="about-label">Currently</div>
+        <div class="about-value">Millisecond inference optimization · Docker MLOps</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ STATS ═══ -->
+  <section class="section">
+    <p class="section-label">// metrics</p>
+    <h2 class="section-title">📊 At a Glance</h2>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value">8.33</div>
+        <div class="stat-label">CGPA</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">4+</div>
+        <div class="stat-label">Production Projects</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">7+</div>
+        <div class="stat-label">Core Technologies</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TECH STACK ═══ -->
+  <section class="section">
+    <p class="section-label">// technologies</p>
+    <h2 class="section-title">🛠️ Core Tech Stack</h2>
+    <div class="stack-grid">
+      <span class="tech-pill tp-python">🐍 Python</span>
+      <span class="tech-pill tp-cpp">⚙️ C++</span>
+      <span class="tech-pill tp-pytorch">🔥 PyTorch</span>
+      <span class="tech-pill tp-tf">🧠 TensorFlow</span>
+      <span class="tech-pill tp-yolo">👁️ YOLOv8</span>
+      <span class="tech-pill tp-cv">🎯 OpenCV</span>
+      <span class="tech-pill tp-fastapi">⚡ FastAPI</span>
+      <span class="tech-pill tp-lc">🔗 LangChain</span>
+      <span class="tech-pill tp-docker">🐳 Docker</span>
+      <span class="tech-pill tp-redis">🔴 Redis</span>
+      <span class="tech-pill tp-mlflow">📈 MLflow</span>
+      <span class="tech-pill tp-n8n">🤖 n8n</span>
+      <span class="tech-pill tp-sol">💎 Solidity</span>
+      <span class="tech-pill tp-react">⚛️ React</span>
+    </div>
+  </section>
+
+  <!-- ═══ PROJECTS ═══ -->
+  <section class="section">
+    <p class="section-label">// engineering</p>
+    <h2 class="section-title">🏗️ Featured Projects</h2>
+
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-title">⚡ Telegram OpenClaw AI</div>
+        <span class="project-tag tag-ai">LLM / RAG</span>
+      </div>
+      <p class="project-desc">Intelligent pedagogical assistant with memory-mapped context extraction and real-time token streaming.</p>
+      <ul class="project-bullets">
+        <li>Custom LLM threads in FastAPI pipelines — async real-time token streaming</li>
+        <li>LangChain memory-mapped context for persistent conversational state</li>
+        <li>Fully local via Ollama + Docker Compose — zero cloud dependency</li>
+      </ul>
+      <div class="stack-row">
+        <span class="stack-chip">Python</span>
+        <span class="stack-chip">FastAPI</span>
+        <span class="stack-chip">LangChain</span>
+        <span class="stack-chip">Ollama</span>
+        <span class="stack-chip">n8n</span>
+        <span class="stack-chip">Docker</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-title">👁️ Distributed Async Inference</div>
+        <span class="project-tag tag-cv">Computer Vision</span>
+      </div>
+      <p class="project-desc">Decoupled high-concurrency CV inference engine built for peak-load robustness.</p>
+      <ul class="project-bullets">
+        <li>Heavy model compute decoupled from core API worker loops</li>
+        <li>Celery task queue + Redis message broker for maximum throughput</li>
+        <li>YOLOv8 real-time object detection at millisecond latency</li>
+      </ul>
+      <div class="stack-row">
+        <span class="stack-chip">FastAPI</span>
+        <span class="stack-chip">Celery</span>
+        <span class="stack-chip">Redis</span>
+        <span class="stack-chip">YOLOv8</span>
+        <span class="stack-chip">Docker</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-title">🪙 Blockchain Faucet DApp</div>
+        <span class="project-tag tag-web3">Web3</span>
+      </div>
+      <p class="project-desc">Full-stack decentralized application with Solidity smart contracts and React frontend.</p>
+      <ul class="project-bullets">
+        <li>Solidity smart contracts compiled and deployed via Hardhat</li>
+        <li>React + Web3.js wallet integration for seamless UX</li>
+        <li>Containerized full stack with Docker Compose</li>
+      </ul>
+      <div class="stack-row">
+        <span class="stack-chip">Solidity</span>
+        <span class="stack-chip">Hardhat</span>
+        <span class="stack-chip">React</span>
+        <span class="stack-chip">Web3.js</span>
+        <span class="stack-chip">Docker</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-title">🌐 Infinity Nebula Portfolio</div>
+        <span class="project-tag tag-port">React + Vite</span>
+      </div>
+      <p class="project-desc">Personal portfolio with custom animations, sub-second load, and continuous deployment.</p>
+      <ul class="project-bullets">
+        <li>Vite bundler optimizations for sub-second load times</li>
+        <li>Responsive design with custom CSS animation system</li>
+        <li>CD pipeline via Vercel on every push</li>
+      </ul>
+      <div class="stack-row">
+        <span class="stack-chip">React</span>
+        <span class="stack-chip">Vite</span>
+        <span class="stack-chip">Tailwind CSS</span>
+        <span class="stack-chip">Vercel</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PROXY FIX NOTICE ═══ -->
+  <section class="section">
+    <p class="section-label">// dev notes</p>
+    <h2 class="section-title">💡 About the Stats Cards</h2>
+
+    <div class="proxy-notice">
+      <h4>⚠ GitHub Camo Proxy Cache Fix</h4>
+      <p>
+        The public <code>github-readme-stats</code> instances are heavily rate-limited.
+        When GitHub's Camo proxy gets a <code>504 Gateway Timeout</code> or <code>429 Too Many Requests</code>,
+        it caches the failure until the TTL expires — this is called <strong>cache poisoning</strong>.
+        <br/><br/>
+        The README uses <code>streak-stats.demolab.com</code> (maintained by DenverCoder9 with
+        dedicated infrastructure) and appends <code>&cache_seconds=86400</code> to reduce re-fetches.
+        If cards still break, hard-refresh (<code>Ctrl+Shift+R</code>) or wait ~1 hour for cache TTL.
+        <br/><br/>
+        The long-term fix is to <strong>self-host</strong> your own <code>github-readme-stats</code>
+        instance on Vercel (free) and point the image URLs to your own deployment.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══ TIMELINE ═══ -->
+  <section class="section">
+    <p class="section-label">// journey</p>
+    <h2 class="section-title">📅 Timeline</h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-year">2024 — INTERNSHIP</div>
+        <div class="tl-title">ML Trainee — NIELIT Gorakhpur</div>
+        <div class="tl-sub">Python · Data Science · NLP · Deep Learning · Movie Recommender System</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2024 — PROJECT</div>
+        <div class="tl-title">Telegram OpenClaw AI Learning Assistant</div>
+        <div class="tl-sub">FastAPI · LangChain · Ollama · Docker · n8n</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2025 — PROJECT</div>
+        <div class="tl-title">Distributed Async AI Inference Service</div>
+        <div class="tl-sub">YOLOv8 · Celery · Redis · FastAPI · Docker</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2025 — PROJECT</div>
+        <div class="tl-title">Blockchain Faucet DApp + NimbusGrid Architecture</div>
+        <div class="tl-sub">Solidity · Hardhat · React · Decentralized Edge Cloud Design</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2026 — PRESENT</div>
+        <div class="tl-title">Final Year · Seeking ML Engineering Roles</div>
+        <div class="tl-sub">Open to opportunities in Computer Vision, LLM, and MLOps</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CONNECT ═══ -->
+  <section class="section">
+    <p class="section-label">// contact</p>
+    <h2 class="section-title">🌐 Connect</h2>
+    <div class="connect-grid">
+      <a class="connect-card" href="https://www.linkedin.com/in/sadanand-k7" target="_blank">
+        <span class="connect-icon">💼</span>
+        <div><div class="connect-label">LinkedIn</div><div class="connect-name">sadanand-k7</div></div>
+      </a>
+      <a class="connect-card" href="https://leetcode.com/sadanandkr7/" target="_blank">
+        <span class="connect-icon">⚡</span>
+        <div><div class="connect-label">LeetCode</div><div class="connect-name">sadanandkr7</div></div>
+      </a>
+      <a class="connect-card" href="https://my-portfolio-sadanand.vercel.app/" target="_blank">
+        <span class="connect-icon">🌌</span>
+        <div><div class="connect-label">Portfolio</div><div class="connect-name">Infinity Nebula</div></div>
+      </a>
+      <a class="connect-card" href="https://github.com/the-sadanand" target="_blank">
+        <span class="connect-icon">🐙</span>
+        <div><div class="connect-label">GitHub</div><div class="connect-name">the-sadanand</div></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="footer">
+    <div class="footer-wave">∞ · Infinity Nebula · ∞</div>
+    <div class="footer-copy">Engineered with precision by Sadanand Kumar · © 2026</div>
+  </footer>
+
+</div><!-- /wrapper -->
+
+<script>
+/* ── STARFIELD ── */
+const sf = document.getElementById('starfield');
+for (let i = 0; i < 180; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  const sz = Math.random() * 2.5 + 0.5;
+  const dur = (Math.random() * 4 + 2).toFixed(1);
+  const lo  = (Math.random() * 0.15 + 0.05).toFixed(2);
+  const hi  = (Math.random() * 0.6 + 0.3).toFixed(2);
+  const del = -(Math.random() * 6).toFixed(1);
+  s.style.cssText = `
+    width:${sz}px; height:${sz}px;
+    top:${Math.random()*100}%; left:${Math.random()*100}%;
+    --d:${dur}s; --lo:${lo}; --hi:${hi};
+    animation-delay:${del}s;
+  `;
+  sf.appendChild(s);
+}
+
+/* ── PARTICLES ── */
+const pc = document.getElementById('particles');
+const pColors = ['rgba(0,242,254,0.6)', 'rgba(250,204,21,0.5)', 'rgba(167,139,250,0.4)'];
+for (let i = 0; i < 18; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  const sz = Math.random() * 3 + 1;
+  p.style.cssText = `
+    width:${sz}px; height:${sz}px;
+    background:${pColors[Math.floor(Math.random()*3)]};
+    left:${Math.random()*100}%;
+    --dur:${(Math.random()*14+8).toFixed(0)}s;
+    animation-delay:-${(Math.random()*14).toFixed(1)}s;
+  `;
+  pc.appendChild(p);
+}
+
+/* ── INTERSECTION OBSERVER — fade-in sections ── */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.section, .project-card, .about-card, .stat-card').forEach(el => {
+  el.style.cssText += 'opacity:0; transform:translateY(20px); transition:opacity 0.6s ease, transform 0.6s ease;';
+  observer.observe(el);
+});
+
+/* ── COUNTER ANIMATION ── */
+function animateCount(el, target, decimals = 0, suffix = '') {
+  let start = 0;
+  const duration = 1800;
+  const step = timestamp => {
+    if (!start) start = timestamp;
+    const progress = Math.min((timestamp - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const val = target * eased;
+    el.textContent = decimals ? val.toFixed(decimals) + suffix : Math.round(val) + suffix;
+    if (progress < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
+const statObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const vals = [8.33, 4, 7];
+      const decs = [2, 0, 0];
+      const suf  = ['', '+', '+'];
+      e.target.querySelectorAll('.stat-value').forEach((el, i) => {
+        animateCount(el, vals[i], decs[i], suf[i]);
+      });
+      statObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+const statsGrid = document.querySelector('.stats-grid');
+if (statsGrid) statObserver.observe(statsGrid);
+</script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+{
+  "name": "infinity-nebula-orbit",
+  "version": "1.0.0",
+  "description": "3D orbital ring system animation config",
+  "rings": [
+    {
+      "id": "ring-1",
+      "color": "#00F2FE",
+      "width": 2,
+      "tiltX": 70,
+      "tiltY": 0,
+      "speed": 5,
+      "direction": "clockwise",
+      "glow": "0 0 8px #00F2FE",
+      "size": "180px"
+    },
+    {
+      "id": "ring-2",
+      "color": "#FACC15",
+      "width": 2,
+      "tiltX": 70,
+      "tiltY": 60,
+      "speed": 8,
+      "direction": "counter-clockwise",
+      "glow": "0 0 8px #FACC15",
+      "size": "200px"
+    },
+    {
+      "id": "ring-3",
+      "color": "rgba(0,242,254,0.35)",
+      "width": 1,
+      "tiltX": 70,
+      "tiltY": 120,
+      "speed": 12,
+      "direction": "clockwise",
+      "glow": "none",
+      "size": "220px"
+    }
+  ],
+  "dots": [
+    {
+      "id": "dot-1",
+      "color": "#00F2FE",
+      "size": 8,
+      "orbitRadius": 90,
+      "speed": 5,
+      "glow": "0 0 12px #00F2FE"
+    },
+    {
+      "id": "dot-2",
+      "color": "#FACC15",
+      "size": 7,
+      "orbitRadius": 100,
+      "speed": 8,
+      "direction": "counter-clockwise",
+      "delay": -2,
+      "glow": "0 0 12px #FACC15"
+    },
+    {
+      "id": "dot-3",
+      "color": "#ffffff",
+      "size": 5,
+      "orbitRadius": 108,
+      "speed": 11,
+      "delay": -5,
+      "glow": "0 0 8px #ffffff"
+    }
+  ],
+  "core": {
+    "size": 80,
+    "label": "SK",
+    "background": "radial-gradient(circle at 35% 35%, #00F2FE, #0052cc 60%, #020817)",
+    "glow": "0 0 20px rgba(0,242,254,0.4), 0 0 60px rgba(0,242,254,0.15)",
+    "pulseSpeed": 3
+  }
+}

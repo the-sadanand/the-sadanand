@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Sadanand Kumar — ML Engineer, Computer Vision, LLM & MLOps" />
+<title>Sadanand Kumar · Infinity Nebula</title>
+<link rel="icon" href="./images/favicon.png" type="image/png" />
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="./assets/css/custom.css" />
+<style>
+/* ── PAGE-SPECIFIC STYLES ── */
+#starfield { position:fixed; inset:0; z-index:0; pointer-events:none; }
+#particles { position:fixed; inset:0; z-index:0; pointer-events:none; }
+
+@keyframes twinkle {
+  0%,100%{opacity:var(--lo,.1);transform:scale(1)}
+  50%{opacity:var(--hi,.8);transform:scale(1.3)}
+}
+@keyframes float-up {
+  0%  {transform:translateY(100vh) scale(0);opacity:0}
+  10% {opacity:.6}
+  90% {opacity:.3}
+  100%{transform:translateY(-20px) scale(1);opacity:0}
+}
+
+.wrapper{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:0 24px 80px}
+
+/* HERO */
+.hero{text-align:center;padding:72px 0 48px}
+.orb-system{position:relative;width:220px;height:220px;margin:0 auto 40px;perspective:600px}
+.orb-core{
+  position:absolute;inset:50%;transform:translate(-50%,-50%);
+  width:80px;height:80px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#00F2FE,#0052cc 60%,#020817);
+  box-shadow:0 0 20px rgba(0,242,254,.4),0 0 60px rgba(0,242,254,.15);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Orbitron',monospace;font-size:13px;color:#fff;font-weight:700;
+  letter-spacing:.1em;z-index:10;
+  animation:pulse-core 3s ease-in-out infinite;
+}
+@keyframes pulse-core{
+  0%,100%{box-shadow:0 0 20px rgba(0,242,254,.4),0 0 60px rgba(0,242,254,.15)}
+  50%{box-shadow:0 0 40px rgba(0,242,254,.7),0 0 100px rgba(0,242,254,.3)}
+}
+.ring{position:absolute;inset:0;border-radius:50%;animation:spin-ring var(--spd,6s) linear infinite}
+.ring::before{
+  content:'';position:absolute;inset:-2px;border-radius:50%;
+  border:2px solid transparent;
+  border-top-color:var(--rc,#00F2FE);border-right-color:var(--rc,#00F2FE);
+}
+.ring-1{--rc:#00F2FE;--spd:5s;transform:rotateX(70deg);top:20px;left:20px;right:20px;bottom:20px;filter:drop-shadow(0 0 6px #00F2FE)}
+.ring-2{--rc:#FACC15;--spd:8s;transform:rotateX(70deg) rotateY(60deg);top:10px;left:10px;right:10px;bottom:10px;animation-direction:reverse;filter:drop-shadow(0 0 6px #FACC15)}
+.ring-3{--rc:rgba(0,242,254,.4);--spd:12s;transform:rotateX(70deg) rotateY(120deg)}
+@keyframes spin-ring{to{transform:rotateX(70deg) rotateZ(360deg)}}
+.orbit-dot{position:absolute;top:50%;left:50%;width:8px;height:8px;border-radius:50%;margin:-4px 0 0 -4px;background:var(--dc,#00F2FE);box-shadow:0 0 12px var(--dc,#00F2FE);animation:orbit var(--ospd,5s) linear infinite;transform-origin:var(--or,90px) 0}
+.orbit-dot-1{--dc:#00F2FE;--ospd:5s;--or:90px}
+.orbit-dot-2{--dc:#FACC15;--ospd:8s;--or:100px;animation-direction:reverse;animation-delay:-2s}
+.orbit-dot-3{--dc:#fff;--ospd:11s;--or:108px;animation-delay:-5s}
+@keyframes orbit{to{transform:rotate(360deg) translateX(var(--or,90px))}}
+
+.hero-name{font-family:'Orbitron',monospace;font-size:clamp(26px,5vw,42px);font-weight:900;background:linear-gradient(135deg,#00F2FE 0%,#a78bfa 45%,#FACC15 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:200%;letter-spacing:.05em;margin-bottom:10px;animation:text-shimmer 5s ease infinite}
+.hero-role{font-family:'Orbitron',monospace;font-size:12px;letter-spacing:.3em;color:#00bcd4;text-transform:uppercase;margin-bottom:24px;opacity:.85}
+.hero-tagline{font-size:14px;color:#94a3b8;max-width:520px;margin:0 auto 32px;line-height:1.7}
+.badge-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+
+/* ABOUT GRID */
+.about-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
+.about-card{background:#0d1b30;border:1px solid rgba(0,242,254,.12);border-radius:12px;padding:18px 20px;transition:all .25s}
+.about-card:hover{border-color:rgba(0,242,254,.4);transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,242,254,.08)}
+.about-icon{font-size:22px;margin-bottom:8px}
+.about-label{font-size:11px;color:#00F2FE;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+.about-value{font-size:13px;font-weight:500;color:#E2E8F0;line-height:1.5}
+
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.stat-card{background:#0d1b30;border:1px solid rgba(0,242,254,.12);border-radius:12px;padding:24px 18px;text-align:center;transition:all .25s}
+.stat-card:hover{border-color:rgba(0,242,254,.4);transform:scale(1.03);box-shadow:0 0 20px rgba(0,242,254,.35),0 0 60px rgba(0,242,254,.12)}
+.stat-value{font-family:'Orbitron',monospace;font-size:34px;font-weight:900;background:linear-gradient(135deg,#00F2FE,#FACC15);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:6px}
+.stat-label{font-size:11px;color:#94a3b8;letter-spacing:.1em;text-transform:uppercase}
+
+/* PROJECTS */
+.project-card{background:#0d1b30;border:1px solid rgba(0,242,254,.12);border-radius:14px;padding:24px 28px;margin-bottom:16px;transition:all .3s;position:relative;overflow:hidden}
+.project-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#00F2FE,#FACC15,transparent);opacity:0;transition:opacity .3s}
+.project-card:hover::after{opacity:1}
+.project-card:hover{border-color:rgba(0,242,254,.3);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,242,254,.08)}
+.project-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
+.project-title{font-family:'Orbitron',monospace;font-size:15px;font-weight:700;color:#00F2FE;letter-spacing:.04em}
+.project-tag{font-size:10px;padding:3px 10px;border-radius:12px;border:1px solid;white-space:nowrap;font-family:'JetBrains Mono',monospace}
+.tag-ai  {color:#00F2FE;border-color:rgba(0,242,254,.4);background:rgba(0,242,254,.07)}
+.tag-cv  {color:#a78bfa;border-color:rgba(167,139,250,.4);background:rgba(167,139,250,.07)}
+.tag-web3{color:#FACC15;border-color:rgba(250,204,21,.4);background:rgba(250,204,21,.07)}
+.tag-port{color:#4ade80;border-color:rgba(74,222,128,.4);background:rgba(74,222,128,.07)}
+.project-desc{font-size:13px;color:#94a3b8;margin-bottom:12px;line-height:1.65;font-style:italic}
+.project-bullets{list-style:none}
+.project-bullets li{font-size:13px;color:#cbd5e1;padding:3px 0 3px 18px;position:relative;line-height:1.6}
+.project-bullets li::before{content:'▸';position:absolute;left:0;color:#FACC15}
+.stack-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.05)}
+.stack-chip{font-family:'JetBrains Mono',monospace;font-size:10px;color:#94a3b8;background:rgba(255,255,255,.04);padding:3px 9px;border-radius:4px;border:1px solid rgba(255,255,255,.07)}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:24px}
+.timeline::before{content:'';position:absolute;left:0;top:8px;bottom:0;width:1px;background:linear-gradient(180deg,#00F2FE,#FACC15,transparent)}
+.tl-item{position:relative;margin-bottom:24px;padding-left:16px}
+.tl-item::before{content:'';position:absolute;left:-20px;top:6px;width:8px;height:8px;border-radius:50%;background:#00F2FE;box-shadow:0 0 10px #00F2FE}
+.tl-year{font-family:'JetBrains Mono',monospace;font-size:11px;color:#FACC15;letter-spacing:.1em;margin-bottom:3px}
+.tl-title{font-size:14px;font-weight:600;color:#E2E8F0;margin-bottom:3px}
+.tl-sub{font-size:12px;color:#94a3b8}
+
+/* CONNECT */
+.connect-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.connect-card{background:#0d1b30;border:1px solid rgba(0,242,254,.12);border-radius:10px;padding:16px 18px;display:flex;align-items:center;gap:12px;text-decoration:none;color:#E2E8F0;transition:all .3s}
+.connect-card:hover{border-color:#00F2FE;transform:translateY(-3px);box-shadow:0 0 20px rgba(0,242,254,.35)}
+.connect-icon{font-size:22px;flex-shrink:0}
+.connect-label{font-size:11px;color:#94a3b8;letter-spacing:.05em}
+.connect-name{font-size:13px;font-weight:600;color:#E2E8F0}
+
+/* FOOTER */
+footer{text-align:center;padding:48px 0 24px;border-top:1px solid rgba(0,242,254,.1);margin-top:64px}
+.footer-wave{font-family:'Orbitron',monospace;font-size:11px;letter-spacing:.4em;color:#94a3b8;text-transform:uppercase;margin-bottom:8px}
+.footer-copy{font-size:12px;color:rgba(148,163,184,.35)}
+
+@media(max-width:600px){
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .stats-grid .stat-card:last-child{grid-column:span 2}
+  .orb-system{width:160px;height:160px}
+}
+</style>
+</head>
+<body>
+
+<div id="starfield"></div>
+<div id="particles"></div>
+
+<div class="wrapper">
+
+  <!-- ══ HERO ══ -->
+  <section class="hero">
+    <div class="orb-system">
+      <div class="ring ring-1"></div>
+      <div class="ring ring-2"></div>
+      <div class="ring ring-3"></div>
+      <div class="orbit-dot orbit-dot-1"></div>
+      <div class="orbit-dot orbit-dot-2"></div>
+      <div class="orbit-dot orbit-dot-3"></div>
+      <div class="orb-core">SK</div>
+    </div>
+    <h1 class="hero-name">Sadanand Kumar</h1>
+    <p class="hero-role">Machine Learning Engineer · Computer Vision · MLOps</p>
+    <p class="hero-tagline">Bridging scalable AI architectures, high-performance Computer Vision engines, and infinity-streaming infrastructure layers.</p>
+    <div class="badge-row">
+      <a class="badge badge-cyan" href="https://www.linkedin.com/in/sadanand-k7" target="_blank">💼 LinkedIn</a>
+      <a class="badge badge-gold" href="https://leetcode.com/sadanandkr7/" target="_blank">⚡ LeetCode</a>
+      <a class="badge badge-cyan" href="https://my-portfolio-sadanand.vercel.app/" target="_blank">🌌 Portfolio</a>
+      <a class="badge badge-ghost" href="https://github.com/the-sadanand" target="_blank">🐙 GitHub</a>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ══ ABOUT ══ -->
+  <section class="section reveal">
+    <p class="section-label">// profile</p>
+    <h2 class="section-title">🧬 About Me</h2>
+    <div class="about-grid">
+      <div class="about-card reveal"><div class="about-icon">🎓</div><div class="about-label">Education</div><div class="about-value">B.Tech CSE — AI & ML<br/>CGPA: <span class="gold">8.33</span></div></div>
+      <div class="about-card reveal"><div class="about-icon">🏛️</div><div class="about-label">Institution</div><div class="about-value">Aditya College of Engineering & Technology</div></div>
+      <div class="about-card reveal"><div class="about-icon">🧠</div><div class="about-label">Core Focus</div><div class="about-value">YOLOv8 · LangChain · FastAPI · Celery · Redis</div></div>
+      <div class="about-card reveal"><div class="about-icon">🛠️</div><div class="about-label">Currently</div><div class="about-value">Millisecond inference · Docker MLOps</div></div>
+    </div>
+  </section>
+
+  <!-- ══ STATS ══ -->
+  <section class="section reveal">
+    <p class="section-label">// metrics</p>
+    <h2 class="section-title">📊 At a Glance</h2>
+    <div class="stats-grid">
+      <div class="stat-card reveal"><div class="stat-value" data-count="8.33" data-decimals="2">8.33</div><div class="stat-label">CGPA</div></div>
+      <div class="stat-card reveal"><div class="stat-value" data-count="4" data-suffix="+">4+</div><div class="stat-label">Production Projects</div></div>
+      <div class="stat-card reveal"><div class="stat-value" data-count="7" data-suffix="+">7+</div><div class="stat-label">Core Technologies</div></div>
+    </div>
+  </section>
+
+  <!-- ══ TECH STACK ══ -->
+  <section class="section reveal">
+    <p class="section-label">// technologies</p>
+    <h2 class="section-title">🛠️ Core Tech Stack</h2>
+    <div class="flex-wrap">
+      <span class="tech-pill" style="color:#4B9CD3;border-color:rgba(75,156,211,.35);background:rgba(75,156,211,.08)">🐍 Python</span>
+      <span class="tech-pill" style="color:#0080ff;border-color:rgba(0,128,255,.35);background:rgba(0,128,255,.08)">⚙️ C++</span>
+      <span class="tech-pill" style="color:#EE4C2C;border-color:rgba(238,76,44,.35);background:rgba(238,76,44,.08)">🔥 PyTorch</span>
+      <span class="tech-pill" style="color:#FF6F00;border-color:rgba(255,111,0,.35);background:rgba(255,111,0,.08)">🧠 TensorFlow</span>
+      <span class="tech-pill" style="color:#00F2FE;border-color:rgba(0,242,254,.35);background:rgba(0,242,254,.08)">👁️ YOLOv8</span>
+      <span class="tech-pill" style="color:#9B59B6;border-color:rgba(155,89,182,.35);background:rgba(155,89,182,.08)">🎯 OpenCV</span>
+      <span class="tech-pill" style="color:#009688;border-color:rgba(0,150,136,.35);background:rgba(0,150,136,.08)">⚡ FastAPI</span>
+      <span class="tech-pill" style="color:#1C9E6E;border-color:rgba(28,158,110,.35);background:rgba(28,158,110,.08)">🔗 LangChain</span>
+      <span class="tech-pill" style="color:#2496ED;border-color:rgba(36,150,237,.35);background:rgba(36,150,237,.08)">🐳 Docker</span>
+      <span class="tech-pill" style="color:#DC382D;border-color:rgba(220,56,45,.35);background:rgba(220,56,45,.08)">🔴 Redis</span>
+      <span class="tech-pill" style="color:#0194E2;border-color:rgba(1,148,226,.35);background:rgba(1,148,226,.08)">📈 MLflow</span>
+      <span class="tech-pill" style="color:#EA4B71;border-color:rgba(234,75,113,.35);background:rgba(234,75,113,.08)">🤖 n8n</span>
+      <span class="tech-pill" style="color:#FACC15;border-color:rgba(250,204,21,.35);background:rgba(250,204,21,.08)">💎 Solidity</span>
+      <span class="tech-pill" style="color:#61DAFB;border-color:rgba(97,218,251,.35);background:rgba(97,218,251,.08)">⚛️ React</span>
+    </div>
+  </section>
+
+  <!-- ══ PROJECTS ══ -->
+  <section class="section">
+    <p class="section-label">// engineering</p>
+    <h2 class="section-title">🏗️ Featured Projects</h2>
+
+    <div class="project-card reveal">
+      <div class="project-header"><div class="project-title">⚡ Telegram OpenClaw AI</div><span class="project-tag tag-ai">LLM / RAG</span></div>
+      <p class="project-desc">Intelligent pedagogical assistant with memory-mapped context extraction and real-time token streaming.</p>
+      <ul class="project-bullets">
+        <li>Custom LLM threads in FastAPI pipelines — async real-time token streaming</li>
+        <li>LangChain memory-mapped context for persistent conversational state</li>
+        <li>Fully local via Ollama + Docker Compose — zero cloud dependency</li>
+      </ul>
+      <div class="stack-row"><span class="stack-chip">Python</span><span class="stack-chip">FastAPI</span><span class="stack-chip">LangChain</span><span class="stack-chip">Ollama</span><span class="stack-chip">n8n</span><span class="stack-chip">Docker</span></div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-header"><div class="project-title">👁️ Distributed Async Inference</div><span class="project-tag tag-cv">Computer Vision</span></div>
+      <p class="project-desc">Decoupled high-concurrency CV inference engine built for peak-load robustness.</p>
+      <ul class="project-bullets">
+        <li>Heavy model compute decoupled from core API worker loops</li>
+        <li>Celery task queue + Redis message broker for maximum throughput</li>
+        <li>YOLOv8 real-time object detection at millisecond latency</li>
+      </ul>
+      <div class="stack-row"><span class="stack-chip">FastAPI</span><span class="stack-chip">Celery</span><span class="stack-chip">Redis</span><span class="stack-chip">YOLOv8</span><span class="stack-chip">Docker</span></div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-header"><div class="project-title">🪙 Blockchain Faucet DApp</div><span class="project-tag tag-web3">Web3</span></div>
+      <p class="project-desc">Full-stack decentralized application with Solidity smart contracts and React frontend.</p>
+      <ul class="project-bullets">
+        <li>Solidity smart contracts compiled and deployed via Hardhat</li>
+        <li>React + Web3.js wallet integration for seamless UX</li>
+        <li>Containerized full stack with Docker Compose</li>
+      </ul>
+      <div class="stack-row"><span class="stack-chip">Solidity</span><span class="stack-chip">Hardhat</span><span class="stack-chip">React</span><span class="stack-chip">Web3.js</span><span class="stack-chip">Docker</span></div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-header"><div class="project-title">🌐 Infinity Nebula Portfolio</div><span class="project-tag tag-port">React + Vite</span></div>
+      <p class="project-desc">Personal portfolio with custom animations, sub-second load, and continuous deployment.</p>
+      <ul class="project-bullets">
+        <li>Vite bundler optimizations for sub-second load times</li>
+        <li>Responsive design with custom CSS animation system</li>
+        <li>CD pipeline via Vercel on every push</li>
+      </ul>
+      <div class="stack-row"><span class="stack-chip">React</span><span class="stack-chip">Vite</span><span class="stack-chip">Tailwind CSS</span><span class="stack-chip">Vercel</span></div>
+    </div>
+  </section>
+
+  <!-- ══ TIMELINE ══ -->
+  <section class="section reveal">
+    <p class="section-label">// journey</p>
+    <h2 class="section-title">📅 Timeline</h2>
+    <div class="timeline">
+      <div class="tl-item reveal"><div class="tl-year">2026 — PRESENT</div><div class="tl-title">Final Year · Seeking ML Engineering Roles</div><div class="tl-sub">Open to Computer Vision · LLM · MLOps opportunities</div></div>
+      <div class="tl-item reveal"><div class="tl-year">2025</div><div class="tl-title">Blockchain Faucet DApp · NimbusGrid Edge Cloud Design</div><div class="tl-sub">Solidity · Hardhat · React · Decentralized Architecture</div></div>
+      <div class="tl-item reveal"><div class="tl-year">2025</div><div class="tl-title">Distributed Async AI Inference Service</div><div class="tl-sub">YOLOv8 · Celery · Redis · FastAPI · Docker</div></div>
+      <div class="tl-item reveal"><div class="tl-year">2024</div><div class="tl-title">Telegram OpenClaw AI Learning Assistant</div><div class="tl-sub">FastAPI · LangChain · Ollama · Docker · n8n</div></div>
+      <div class="tl-item reveal"><div class="tl-year">2024 — INTERNSHIP</div><div class="tl-title">ML Trainee — NIELIT Gorakhpur</div><div class="tl-sub">Python · Data Science · NLP · Deep Learning · Movie Recommender System</div></div>
+    </div>
+  </section>
+
+  <!-- ══ CONNECT ══ -->
+  <section class="section reveal">
+    <p class="section-label">// contact</p>
+    <h2 class="section-title">🌐 Connect</h2>
+    <div class="connect-grid">
+      <a class="connect-card" href="https://www.linkedin.com/in/sadanand-k7" target="_blank"><span class="connect-icon">💼</span><div><div class="connect-label">LinkedIn</div><div class="connect-name">sadanand-k7</div></div></a>
+      <a class="connect-card" href="https://leetcode.com/sadanandkr7/" target="_blank"><span class="connect-icon">⚡</span><div><div class="connect-label">LeetCode</div><div class="connect-name">sadanandkr7</div></div></a>
+      <a class="connect-card" href="https://my-portfolio-sadanand.vercel.app/" target="_blank"><span class="connect-icon">🌌</span><div><div class="connect-label">Portfolio</div><div class="connect-name">Infinity Nebula</div></div></a>
+      <a class="connect-card" href="https://github.com/the-sadanand" target="_blank"><span class="connect-icon">🐙</span><div><div class="connect-label">GitHub</div><div class="connect-name">the-sadanand</div></div></a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-wave">∞ · Infinity Nebula · ∞</div>
+    <div class="footer-copy">Engineered with precision by Sadanand Kumar · © 2026</div>
+  </footer>
+
+</div>
+
+<script src="./assets/js/effects.js"></script>
+</body>
+</html>
