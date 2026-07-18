@@ -162,18 +162,6 @@ I'm a **Machine Learning Engineer Trainee** and final-year **B.Tech CSE (AI & ML
 
 ---
 
-## 📅 Timeline
-
-| Year | Event |
-|------|-------|
-| 2026 | 🎓 Final Year · Seeking ML Engineering Roles |
-| 2025 | 🪙 Blockchain Faucet DApp · NimbusGrid Edge Cloud Architecture |
-| 2025 | 👁️ Distributed Async AI Inference Service (YOLOv8 + Celery + Redis) |
-| 2024 | ⚡ Telegram OpenClaw AI Learning Assistant |
-| 2024 | 🔬 ML Internship — NIELIT Gorakhpur (Python · NLP · Deep Learning) |
-
----
-
 ## 🌐 Connect
 
 <div align="center">
