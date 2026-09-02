@@ -128,11 +128,13 @@ I'm a **Machine Learning Engineer Trainee** and final-year **B.Tech CSE (AI & ML
 
 ---
 
+---
+
 ## 📈 Contribution Graph
 
 <div align="center">
 
-[![GitHub Contribution Graph](https://github-contribution-graph.ez4o.com/?username=the-sadanand&last_n_days=365)](https://github.com/the-sadanand)
+[![Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=the-sadanand&theme=tokyo-night&hide_border=true&bg_color=0D1117&color=00F2FE&line=FACC15&point=FFFFFF)](https://github.com/the-sadanand)
 
 </div>
 
